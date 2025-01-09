@@ -45,6 +45,7 @@ namespace MonoHook
                 {
                     MemCpy(pDst, pSrc, src.Length);
                 }
+
                 return;
             }
             
