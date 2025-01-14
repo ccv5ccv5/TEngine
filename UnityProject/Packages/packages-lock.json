@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "cn.tuanjie.minigame.host": {
+      "version": "1.0.6",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.tuanjie.cn"
+    },
     "com.code-philosophy.hybridclr": {
       "version": "file:Hybridclr",
       "depth": 0,
@@ -11,6 +18,13 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
+    },
+    "com.qq.weixin.minigame": {
+      "version": "https://gitee.com/wechat-minigame/minigame-tuanjie-transform-sdk.git#v0.1.10",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "09760d709ee2c459c4482658a1c4834313731c55"
     },
     "com.tuyoogame.yooasset": {
       "version": "file:YooAsset",
