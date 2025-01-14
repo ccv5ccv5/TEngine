@@ -65,6 +65,7 @@ namespace TEngine
         /// <param name="fsm">有限状态机引用。</param>
         protected void ChangeState<TState>(IFsm<T> fsm) where TState : FsmState<T>
         {
+            Log.Debug($"ChangeState<{typeof(TState).Name}>");
             Fsm<T> fsmImplement = (Fsm<T>)fsm;
             if (fsmImplement == null)
             {
