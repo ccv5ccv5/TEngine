@@ -83,7 +83,8 @@ namespace GameMain
                         UILoadMgr.Show(UIDefine.UILoadUpdate);
 
                         Log.Info("Updatable resource mode detected.");
-                        ChangeState<ProcedureUpdateVersion>(procedureOwner);
+                        // ChangeState<ProcedureUpdateVersion>(procedureOwner);
+                        ChangeState<ProcedureStartGame>(procedureOwner);
                     }
                     else
                     {
