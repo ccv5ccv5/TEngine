@@ -243,6 +243,9 @@ namespace TEngine
             {
                 string defaultHostServer = HostServerURL;
                 string fallbackHostServer = FallbackHostServerURL;
+
+                Log.Debug($"defaultHostServer:{defaultHostServer}");
+                Log.Debug($"fallbackHostServer:{fallbackHostServer}");
                 var createParameters = new WebPlayModeParameters();
                 createParameters.CacheBootVerifyLevel = VerifyLevel;
                 createParameters.DecryptionServices = new FileStreamDecryption();

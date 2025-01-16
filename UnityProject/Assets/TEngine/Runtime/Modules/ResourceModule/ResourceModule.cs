@@ -306,6 +306,8 @@ namespace TEngine
             m_ResourceManager.AssetCapacity = m_AssetCapacity;
             m_ResourceManager.AssetExpireTime = m_AssetExpireTime;
             m_ResourceManager.AssetPriority = m_AssetPriority;
+
+            Log.Debug($"ResourceComponent HostServerURL: {m_ResourceManager.HostServerURL}");
             Log.Info($"ResourceComponent Run Mode：{PlayMode}");
         }
 
