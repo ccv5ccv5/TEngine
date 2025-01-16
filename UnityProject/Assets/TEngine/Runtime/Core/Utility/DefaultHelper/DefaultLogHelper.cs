@@ -34,7 +34,7 @@ namespace TEngine
             switch (level)
             {
                 case GameFrameworkLogLevel.Debug:
-                    LogImp(ELogLevel.Debug, Utility.Text.Format("<color=#888888>{0}</color>", message));
+                    LogImp(ELogLevel.Debug, message.ToString());
                     break;
 
                 case GameFrameworkLogLevel.Info:
@@ -71,46 +71,22 @@ namespace TEngine
             switch (eLogLevel)
             {
                 case ELogLevel.Debug:
-                    _stringBuilder.AppendFormat(
-                        bColor
-                            ? "<color=#CFCFCF><b>[Debug] ► </b></color> - <color=#00FF18>{0}</color>"
-                            : "<color=#00FF18><b>[Debug] ► </b></color> - {0}",
-                        logString);
+                    _stringBuilder.AppendFormat("[Debug] ► - {0}", logString);
                     break;
                 case ELogLevel.Info:
-                    _stringBuilder.AppendFormat(
-                        bColor
-                            ? "<color=#CFCFCF><b>[INFO] ► </b></color> - <color=#CFCFCF>{0}</color>"
-                            : "<color=#CFCFCF><b>[INFO] ► </b></color> - {0}",
-                        logString);
+                    _stringBuilder.AppendFormat("[INFO] ► - {0}", logString);
                     break;
                 case ELogLevel.Assert:
-                    _stringBuilder.AppendFormat(
-                        bColor
-                            ? "<color=#FF00BD><b>[ASSERT] ► </b></color> - <color=green>{0}</color>"
-                            : "<color=#FF00BD><b>[ASSERT] ► </b></color> - {0}",
-                        logString);
+                    _stringBuilder.AppendFormat("[ASSERT] ► - {0}", logString);
                     break;
                 case ELogLevel.Warning:
-                    _stringBuilder.AppendFormat(
-                        bColor
-                            ? "<color=#FF9400><b>[WARNING] ► </b></color> - <color=yellow>{0}</color>"
-                            : "<color=#FF9400><b>[WARNING] ► </b></color> - {0}",
-                        logString);
+                    _stringBuilder.AppendFormat("[WARNING] ► - {0}", logString);
                     break;
                 case ELogLevel.Error:
-                    _stringBuilder.AppendFormat(
-                        bColor
-                            ? "<color=red><b>[ERROR] ► </b></color> - <color=red>{0}</color>"
-                            : "<color=red><b>[ERROR] ► </b></color>- {0}",
-                        logString);
+                    _stringBuilder.AppendFormat("[ERROR] ► - {0}", logString);
                     break;
                 case ELogLevel.Exception:
-                    _stringBuilder.AppendFormat(
-                        bColor
-                            ? "<color=red><b>[EXCEPTION] ► </b></color> - <color=red>{0}</color>"
-                            : "<color=red><b>[EXCEPTION] ► </b></color> - {0}",
-                        logString);
+                    _stringBuilder.AppendFormat("[EXCEPTION] ► - {0}", logString);
                     break;
             }
 
