@@ -15,6 +15,7 @@ namespace TEngine.Editor
             BuildTargetGroup.Android,
             BuildTargetGroup.WSA,
             BuildTargetGroup.WebGL,
+            BuildTargetGroup.WeixinMiniGame,
             BuildTargetGroup.PS5
         };
 
