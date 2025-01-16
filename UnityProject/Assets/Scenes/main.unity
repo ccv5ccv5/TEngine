@@ -490,12 +490,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   availableProcedureTypeNames:
   - GameMain.ProcedureClearCache
+  - GameMain.ProcedureCreateDownloader
+  - GameMain.ProcedureDownloadFile
+  - GameMain.ProcedureDownloadOver
   - GameMain.ProcedureInitPackage
+  - GameMain.ProcedureInitResources
   - GameMain.ProcedureLaunch
   - GameMain.ProcedureLoadAssembly
   - GameMain.ProcedurePreload
   - GameMain.ProcedureSplash
   - GameMain.ProcedureStartGame
+  - GameMain.ProcedureUpdateManifest
+  - GameMain.ProcedureUpdateVersion
   entranceProcedureTypeName: GameMain.ProcedureLaunch
 --- !u!1 &709048974
 GameObject:

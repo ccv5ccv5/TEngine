@@ -1,6 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using TEngine;
+using UnityEngine.SceneManagement;
 
 namespace GameMain
 {
@@ -18,6 +19,26 @@ namespace GameMain
         {
             await UniTask.Yield();
             UILoadMgr.HideAll();
+            
+            // 加载testscene场景
+            var sceneModule = ModuleSystem.GetModule<SceneModule>();
+            if (sceneModule != null)
+            {
+                var sceneHandle = sceneModule.LoadScene("Assets/AssetRaw/Scenes/New Scene.scene", LoadSceneMode.Single, false, 100, (handle) =>
+                {
+                    Log.Info($"Scene {handle.SceneName} loaded successfully.");
+                });
+                
+                // 等待场景加载完成
+                while (!sceneHandle.IsDone)
+                {
+                    await UniTask.Yield();
+                }
+            }
+            else
+            {
+                Log.Error("SceneModule is invalid.");
+            }
         }
     }
 }
