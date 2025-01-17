@@ -17,7 +17,7 @@ public partial class GameApp:Singleton<GameApp>
     public static void Entrance(object[] objects)
     {
         _hotfixAssembly = (List<Assembly>)objects[0];
-        Log.Warning("======= 看到此条日志代表你成功运行了热更新代码 =======");
+        Log.Warning("======= 2222 看到此条日志代表你成功运行了热更新代码 =======");
         Log.Warning("======= Entrance GameApp =======");
         Instance.Active();
         Instance.Start();
