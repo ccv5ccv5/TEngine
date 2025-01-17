@@ -8,7 +8,7 @@ public class TestPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Log.Debug("TestPanel Start not hotfix");   
+        Log.Debug("TestPanel Start DO Hotfix");
     }
 
     // Update is called once per frame
