@@ -34,6 +34,7 @@ namespace GameMain
                 return;
             }
 
+            Log.Info("ProcedureInitResources to ProcedurePreload");
             ChangeState<ProcedurePreload>(procedureOwner);
         }
 

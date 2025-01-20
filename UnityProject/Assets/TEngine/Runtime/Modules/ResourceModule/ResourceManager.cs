@@ -133,10 +133,6 @@ namespace TEngine
             YooAssets.Initialize(new ResourceLogger());
             YooAssets.SetOperationSystemMaxTimeSlice(Milliseconds);
 
-#if (UNITY_WECHAT_GAME || UNITY_WEIXINMINIGAME) && !UNITY_EDITOR
-            YooAssets.SetCacheSystemDisableCacheOnWebGL();    
-#endif
-
             // 创建默认的资源包
             string packageName = DefaultPackageName;
             var defaultPackage = YooAssets.TryGetPackage(packageName);
@@ -216,10 +212,6 @@ namespace TEngine
             if (playMode == EPlayMode.EditorSimulateMode)
             {
                 Debug.Log("EditorSimulateMode");
-                // var createParameters = new EditorSimulateModeParameters();
-                // createParameters.CacheBootVerifyLevel = VerifyLevel;
-                // createParameters.SimulateManifestFilePath = EditorSimulateModeHelper.SimulateBuild(packageName);
-                // initializationOperation = package.InitializeAsync(createParameters);
                 var buildResult = EditorSimulateModeHelper.SimulateBuild(packageName);
                 var packageRoot = buildResult.PackageRootDirectory;
                 var createParameters = new EditorSimulateModeParameters();
@@ -238,14 +230,6 @@ namespace TEngine
             // 联机运行模式
             if (playMode == EPlayMode.HostPlayMode)
             {
-                // string defaultHostServer = HostServerURL;
-                // string fallbackHostServer = FallbackHostServerURL;
-                // var createParameters = new HostPlayModeParameters();
-                // createParameters.CacheBootVerifyLevel = VerifyLevel;
-                // createParameters.DecryptionServices = new FileStreamDecryption();
-                // createParameters.BuildinQueryServices = new GameQueryServices();
-                // createParameters.RemoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
-                // initializationOperation = package.InitializeAsync(createParameters);
                 string defaultHostServer = HostServerURL;
                 string fallbackHostServer = FallbackHostServerURL;
                 IRemoteServices remoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
@@ -258,17 +242,6 @@ namespace TEngine
             // WebGL运行模式
             if (playMode == EPlayMode.WebPlayMode)
             {
-                // string defaultHostServer = HostServerURL;
-                // string fallbackHostServer = FallbackHostServerURL;
-
-                // Log.Debug($"defaultHostServer:{defaultHostServer}");
-                // Log.Debug($"fallbackHostServer:{fallbackHostServer}");
-                // var createParameters = new WebPlayModeParameters();
-                // createParameters.CacheBootVerifyLevel = VerifyLevel;
-                // createParameters.DecryptionServices = new FileStreamDecryption();
-                // createParameters.BuildinQueryServices = new GameQueryServices();
-                // createParameters.RemoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
-                // initializationOperation = package.InitializeAsync(createParameters);
                 var createParameters = new WebPlayModeParameters();
     #if UNITY_WEBGL && WEIXINMINIGAME && !UNITY_EDITOR
                 string defaultHostServer = HostServerURL;

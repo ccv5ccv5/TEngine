@@ -61,38 +61,40 @@ namespace GameMain
 
                 if (initializationOperation.Status == EOperationStatus.Succeed)
                 {
-                    //热更新阶段文本初始化
-                    LoadText.Instance.InitConfigData(null);
+                    // //热更新阶段文本初始化
+                    // LoadText.Instance.InitConfigData(null);
 
-                    EPlayMode playMode = GameModule.Resource.PlayMode;
+                    // EPlayMode playMode = GameModule.Resource.PlayMode;
 
-                    // 编辑器模式。
-                    if (playMode == EPlayMode.EditorSimulateMode)
-                    {
-                        Log.Info("Editor resource mode detected.");
-                        ChangeState<ProcedurePreload>(procedureOwner);
-                    }
-                    // 单机模式。
-                    else if (playMode == EPlayMode.OfflinePlayMode)
-                    {
-                        Log.Info("Package resource mode detected.");
-                        ChangeState<ProcedureInitResources>(procedureOwner);
-                    }
-                    // 可更新模式。
-                    else if (playMode == EPlayMode.HostPlayMode ||
-                             playMode == EPlayMode.WebPlayMode)
-                    {
-                        // 打开启动UI。
-                        UILoadMgr.Show(UIDefine.UILoadUpdate);
+                    // // 编辑器模式。
+                    // if (playMode == EPlayMode.EditorSimulateMode)
+                    // {
+                    //     Log.Info("Editor resource mode detected.");
+                    //     ChangeState<ProcedurePreload>(procedureOwner);
+                    // }
+                    // // 单机模式。
+                    // else if (playMode == EPlayMode.OfflinePlayMode)
+                    // {
+                    //     Log.Info("Package resource mode detected.");
+                    //     ChangeState<ProcedureInitResources>(procedureOwner);
+                    // }
+                    // // 可更新模式。
+                    // else if (playMode == EPlayMode.HostPlayMode ||
+                    //          playMode == EPlayMode.WebPlayMode)
+                    // {
+                    //     // 打开启动UI。
+                    //     UILoadMgr.Show(UIDefine.UILoadUpdate);
 
-                        Log.Info("Updatable resource mode detected.");
-                        ChangeState<ProcedureUpdateVersion>(procedureOwner);
-                        // ChangeState<ProcedureStartGame>(procedureOwner);
-                    }
-                    else
-                    {
-                        Log.Error("UnKnow resource mode detected Please check???");
-                    }
+                    //     Log.Info("Updatable resource mode detected.");
+                    //     ChangeState<ProcedureUpdateVersion>(procedureOwner);
+                    // }
+                    // else
+                    // {
+                    //     Log.Error("UnKnow resource mode detected Please check???");
+                    // }
+
+                    UILoadMgr.Show(UIDefine.UILoadUpdate);
+                    ChangeState<ProcedureUpdateVersion>(procedureOwner);
                 }
                 else
                 {

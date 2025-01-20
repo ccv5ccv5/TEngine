@@ -37,13 +37,15 @@ namespace GameMain
                 // TODO: 先注释掉。 后面测试+阅读代码后决定要不要留
                 // operation.SavePackageVersion();
                 
-                if (GameModule.Resource.PlayMode == EPlayMode.WebPlayMode ||
-                    GameModule.Resource.UpdatableWhilePlaying)
-                {
-                    // 边玩边下载还可以拓展首包支持。
-                    ChangeState<ProcedurePreload>(procedureOwner);
-                    return;
-                }
+                // if (GameModule.Resource.PlayMode == EPlayMode.WebPlayMode ||
+                //     GameModule.Resource.UpdatableWhilePlaying)
+                // {
+                //     // 边玩边下载还可以拓展首包支持。
+                //    Log.Info("ProcedureCreateDownloader to ProcedurePreload");
+                //     ChangeState<ProcedurePreload>(procedureOwner);
+                //     return;
+                // }
+                Log.Info("ProcedureCreateDownloader to ProcedurePreload");
                 ChangeState<ProcedureCreateDownloader>(procedureOwner);
             }
             else
