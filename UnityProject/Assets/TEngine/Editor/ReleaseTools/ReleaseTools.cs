@@ -136,7 +136,7 @@ namespace TEngine.Editor
             buildParameters.BuildinFileRoot = AssetBundleBuilderHelper.GetStreamingAssetsRoot();
             buildParameters.BuildPipeline = buildPipeline.ToString();
             buildParameters.BuildTarget = buildTarget;
-            buildParameters.BuildMode = EBuildMode.IncrementalBuild;
+            // buildParameters.BuildMode = EBuildMode.IncrementalBuild;
             buildParameters.PackageName = "DefaultPackage";
             buildParameters.PackageVersion = packageVersion;
             buildParameters.VerifyBuildingResult = true;

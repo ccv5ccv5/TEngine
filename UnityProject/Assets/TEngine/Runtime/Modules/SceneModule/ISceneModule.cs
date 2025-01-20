@@ -48,7 +48,7 @@ namespace TEngine
         /// </summary>
         /// <param name="location">场景资源定位地址。</param>
         /// <returns>是否主场景。</returns>
-        public bool IsMainScene(string location);
+        // public bool IsMainScene(string location);
 
         /// <summary>
         /// 异步卸载子场景。

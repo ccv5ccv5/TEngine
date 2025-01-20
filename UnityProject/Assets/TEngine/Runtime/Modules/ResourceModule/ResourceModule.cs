@@ -98,7 +98,7 @@ namespace TEngine
         /// <summary>
         /// 下载文件校验等级。
         /// </summary>
-        public EVerifyLevel VerifyLevel = EVerifyLevel.Middle;
+        public EFileVerifyLevel VerifyLevel = EFileVerifyLevel.Middle;
 
         [SerializeField] private ReadWritePathType m_ReadWritePathType = ReadWritePathType.Unspecified;
 
@@ -352,13 +352,13 @@ namespace TEngine
         /// <param name="timeout">超时时间。</param>
         /// <param name="customPackageName">指定资源包的名称。不传使用默认资源包</param>
         /// <returns>请求远端包裹的最新版本操作句柄。</returns>
-        public UpdatePackageVersionOperation UpdatePackageVersionAsync(bool appendTimeTicks = false, int timeout = 60,
+        public RequestPackageVersionOperation UpdatePackageVersionAsync(bool appendTimeTicks = false, int timeout = 60,
             string customPackageName = "")
         {
             var package = string.IsNullOrEmpty(customPackageName)
                 ? YooAssets.GetPackage(PackageName)
                 : YooAssets.GetPackage(customPackageName);
-            return package.UpdatePackageVersionAsync(appendTimeTicks, timeout);
+            return package.RequestPackageVersionAsync(appendTimeTicks, timeout);
         }
 
         /// <summary>
@@ -374,7 +374,7 @@ namespace TEngine
             var package = string.IsNullOrEmpty(customPackageName)
                 ? YooAssets.GetPackage(PackageName)
                 : YooAssets.GetPackage(customPackageName);
-            return package.UpdatePackageManifestAsync(packageVersion, autoSaveVersion, timeout);
+            return package.UpdatePackageManifestAsync(packageVersion, timeout);
         }
         
         /// <summary>
@@ -406,12 +406,15 @@ namespace TEngine
         /// 清理包裹未使用的缓存文件。
         /// </summary>
         /// <param name="customPackageName">指定资源包的名称。不传使用默认资源包</param>
-        public ClearUnusedCacheFilesOperation ClearUnusedCacheFilesAsync(string customPackageName = "")
+        public ClearCacheFilesOperation ClearUnusedCacheFilesAsync(string customPackageName = "")
         {
             var package = string.IsNullOrEmpty(customPackageName)
                 ? YooAssets.GetPackage(PackageName)
                 : YooAssets.GetPackage(customPackageName);
-            return package.ClearUnusedCacheFilesAsync();
+            // return package.ClearUnusedBundleFilesAsync();
+
+            // TODO: clearMode不知道是啥, 先让报错减少后续再加
+            return package.ClearCacheFilesAsync(m_ResourceManager.ClearMode);
         }
 
         /// <summary>
@@ -420,10 +423,11 @@ namespace TEngine
         /// <param name="customPackageName">指定资源包的名称。不传使用默认资源包</param>
         public void ClearSandbox(string customPackageName = "")
         {
-            var package = string.IsNullOrEmpty(customPackageName)
-                ? YooAssets.GetPackage(PackageName)
-                : YooAssets.GetPackage(customPackageName);
-            package.ClearPackageSandbox();
+            // 2.2.0 版本后，ClearPackageSandbox 方法被移除
+            // var package = string.IsNullOrEmpty(customPackageName)
+            //     ? YooAssets.GetPackage(PackageName)
+            //     : YooAssets.GetPackage(customPackageName);
+            // package.ClearPackageSandbox();
         }
         #endregion
 

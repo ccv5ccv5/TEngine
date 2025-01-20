@@ -29,7 +29,9 @@ namespace TEngine
         /// <summary>
         /// 缓存系统启动时的验证级别。
         /// </summary>
-        EVerifyLevel VerifyLevel { get; set; }
+        EFileVerifyLevel VerifyLevel { get; set; }
+
+        EFileClearMode ClearMode { get; set; }
 
         /// <summary>
         /// 同时下载的最大数目。
@@ -136,7 +138,7 @@ namespace TEngine
         /// <summary>
         /// 资源回收（卸载引用计数为零的资源）
         /// </summary>
-        void UnloadUnusedAssets();
+        UniTask UnloadUnusedAssets();
 
         /// <summary>
         /// 强制回收所有资源

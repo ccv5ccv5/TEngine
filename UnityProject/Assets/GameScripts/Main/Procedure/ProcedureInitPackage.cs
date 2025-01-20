@@ -29,6 +29,7 @@ namespace GameMain
 
         private async UniTaskVoid InitPackage(ProcedureOwner procedureOwner)
         {
+            Log.Info("InitPackage: " + GameModule.Resource.PlayMode);
             try
             {
                 if (GameModule.Resource.PlayMode == EPlayMode.HostPlayMode ||
@@ -55,6 +56,8 @@ namespace GameMain
                 }
 
                 var initializationOperation = await GameModule.Resource.InitPackage();
+
+                Log.Info("InitPackage: " + initializationOperation.Status);
 
                 if (initializationOperation.Status == EOperationStatus.Succeed)
                 {

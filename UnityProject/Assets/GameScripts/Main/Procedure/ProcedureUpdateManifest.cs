@@ -34,7 +34,8 @@ namespace GameMain
             {
                 //更新成功
                 //注意：保存资源版本号作为下次默认启动的版本!
-                operation.SavePackageVersion();
+                // TODO: 先注释掉。 后面测试+阅读代码后决定要不要留
+                // operation.SavePackageVersion();
                 
                 if (GameModule.Resource.PlayMode == EPlayMode.WebPlayMode ||
                     GameModule.Resource.UpdatableWhilePlaying)

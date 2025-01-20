@@ -40,22 +40,42 @@ namespace TEngine
             /// 同步方式获取解密的资源包对象
             /// 注意：加载流对象在资源包对象释放的时候会自动释放
             /// </summary>
-            AssetBundle IDecryptionServices.LoadAssetBundle(DecryptFileInfo fileInfo, out Stream managedStream)
+             DecryptResult IDecryptionServices.LoadAssetBundle(DecryptFileInfo fileInfo)
             {
                 BundleStream bundleStream = new BundleStream(fileInfo.FileLoadPath, FileMode.Open, FileAccess.Read, FileShare.Read);
-                managedStream = bundleStream;
-                return AssetBundle.LoadFromStream(bundleStream, fileInfo.ConentCRC, GetManagedReadBufferSize());
+                DecryptResult decryptResult = new DecryptResult();
+                decryptResult.ManagedStream = bundleStream;
+                decryptResult.Result = AssetBundle.LoadFromStream(bundleStream, fileInfo.FileLoadCRC, GetManagedReadBufferSize());
+                return decryptResult;
             }
 
             /// <summary>
             /// 异步方式获取解密的资源包对象
             /// 注意：加载流对象在资源包对象释放的时候会自动释放
             /// </summary>
-            AssetBundleCreateRequest IDecryptionServices.LoadAssetBundleAsync(DecryptFileInfo fileInfo, out Stream managedStream)
+            DecryptResult IDecryptionServices.LoadAssetBundleAsync(DecryptFileInfo fileInfo)
             {
                 BundleStream bundleStream = new BundleStream(fileInfo.FileLoadPath, FileMode.Open, FileAccess.Read, FileShare.Read);
-                managedStream = bundleStream;
-                return AssetBundle.LoadFromStreamAsync(bundleStream, fileInfo.ConentCRC, GetManagedReadBufferSize());
+                DecryptResult decryptResult = new DecryptResult();
+                decryptResult.ManagedStream = bundleStream;
+                decryptResult.CreateRequest = AssetBundle.LoadFromStreamAsync(bundleStream, fileInfo.FileLoadCRC, GetManagedReadBufferSize());
+                return decryptResult;
+            }
+
+            /// <summary>
+            /// 获取解密的字节数据
+            /// </summary>
+            byte[] IDecryptionServices.ReadFileData(DecryptFileInfo fileInfo)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            /// <summary>
+            /// 获取解密的文本数据
+            /// </summary>
+            string IDecryptionServices.ReadFileText(DecryptFileInfo fileInfo)
+            {
+                throw new System.NotImplementedException();
             }
 
             private static uint GetManagedReadBufferSize()
@@ -69,24 +89,40 @@ namespace TEngine
         /// </summary>
         private class FileOffsetDecryption : IDecryptionServices
         {
-            /// <summary>
-            /// 同步方式获取解密的资源包对象
-            /// 注意：加载流对象在资源包对象释放的时候会自动释放
-            /// </summary>
-            AssetBundle IDecryptionServices.LoadAssetBundle(DecryptFileInfo fileInfo, out Stream managedStream)
+            DecryptResult IDecryptionServices.LoadAssetBundle(DecryptFileInfo fileInfo)
             {
-                managedStream = null;
-                return AssetBundle.LoadFromFile(fileInfo.FileLoadPath, fileInfo.ConentCRC, GetFileOffset());
+                DecryptResult decryptResult = new DecryptResult();
+                decryptResult.ManagedStream = null;
+                decryptResult.Result = AssetBundle.LoadFromFile(fileInfo.FileLoadPath, fileInfo.FileLoadCRC, GetFileOffset());
+                return decryptResult;
             }
 
             /// <summary>
             /// 异步方式获取解密的资源包对象
             /// 注意：加载流对象在资源包对象释放的时候会自动释放
             /// </summary>
-            AssetBundleCreateRequest IDecryptionServices.LoadAssetBundleAsync(DecryptFileInfo fileInfo, out Stream managedStream)
+            DecryptResult IDecryptionServices.LoadAssetBundleAsync(DecryptFileInfo fileInfo)
             {
-                managedStream = null;
-                return AssetBundle.LoadFromFileAsync(fileInfo.FileLoadPath, fileInfo.ConentCRC, GetFileOffset());
+                DecryptResult decryptResult = new DecryptResult();
+                decryptResult.ManagedStream = null;
+                decryptResult.CreateRequest = AssetBundle.LoadFromFileAsync(fileInfo.FileLoadPath, fileInfo.FileLoadCRC, GetFileOffset());
+                return decryptResult;
+            }
+
+            /// <summary>
+            /// 获取解密的字节数据
+            /// </summary>
+            byte[] IDecryptionServices.ReadFileData(DecryptFileInfo fileInfo)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            /// <summary>
+            /// 获取解密的文本数据
+            /// </summary>
+            string IDecryptionServices.ReadFileText(DecryptFileInfo fileInfo)
+            {
+                throw new System.NotImplementedException();
             }
 
             private static ulong GetFileOffset()
@@ -126,7 +162,8 @@ namespace TEngine
     /// <summary>
     /// 资源文件查询服务类
     /// </summary>
-    public class GameQueryServices : IBuildinQueryServices
+    // public class GameQueryServices : IBuildinQueryServices
+    public class GameQueryServices
     {
         /// <summary>
         /// 查询内置文件的时候，是否比对文件哈希值
