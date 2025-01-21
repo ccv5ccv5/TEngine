@@ -30,7 +30,8 @@ namespace TEngine.Editor.UI
         [LabelText("类名")]
         public string className;
         [LabelText("生成位置"), FolderPath]
-        public string savePath= "Assets/Scripts/UIScriptsAuto";
+        public string savePath= "Assets/GameScripts/HotFix/GameLogic/UI";
+        
 
         [ReadOnly, LabelText("生成的脚本"),HorizontalGroup(GroupID ="BS")]
         public TextAsset buildScript;
