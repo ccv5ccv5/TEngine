@@ -25,8 +25,11 @@ namespace TEngine
             private bool _lastErrorFilter = true;
             private bool _lastFatalFilter = true;
 
+            private Rect _splitterRect;
+            private bool _isDragging = false;
+
             [SerializeField]
-            private bool m_LockScroll = true;
+            private bool m_LockScroll = false;
 
             [SerializeField]
             private int m_MaxLine = 100;
@@ -133,7 +136,7 @@ namespace TEngine
                 }
 
                 Application.logMessageReceived += OnLogMessageReceived;
-                m_LockScroll = _lastLockScroll = _settingModule.GetBool("Debugger.Console.LockScroll", true);
+                m_LockScroll = _lastLockScroll = _settingModule.GetBool("Debugger.Console.LockScroll", false);
                 m_InfoFilter = _lastInfoFilter = _settingModule.GetBool("Debugger.Console.InfoFilter", true);
                 m_WarningFilter = _lastWarningFilter = _settingModule.GetBool("Debugger.Console.WarningFilter", true);
                 m_ErrorFilter = _lastErrorFilter = _settingModule.GetBool("Debugger.Console.ErrorFilter", true);
@@ -248,15 +251,22 @@ namespace TEngine
                                     }
                                     break;
                             }
-                            if (GUILayout.Toggle(_selectedNode == logNode, GetLogString(logNode)))
+                            GUILayout.BeginHorizontal();
                             {
-                                selected = true;
-                                if (_selectedNode != logNode)
+                                // if (GUILayout.Toggle(_selectedNode == logNode, GetLogString(logNode)))
+                                if (GUILayout.Toggle(_selectedNode == logNode, ""))
                                 {
-                                    _selectedNode = logNode;
-                                    _stackScrollPosition = Vector2.zero;
+                                    selected = true;
+                                    if (_selectedNode != logNode)
+                                    {
+                                        _selectedNode = logNode;
+                                        _stackScrollPosition = Vector2.zero;
+                                    }
                                 }
+                                GUILayout.Label(GetLogString(logNode));
+                                GUILayout.FlexibleSpace();
                             }
+                            GUILayout.EndHorizontal();
                         }
                         if (!selected)
                         {
@@ -264,6 +274,8 @@ namespace TEngine
                         }
                     }
                     GUILayout.EndScrollView();
+
+                    _splitterRect = GUILayoutUtility.GetLastRect();
                 }
                 GUILayout.EndVertical();
 
@@ -273,6 +285,11 @@ namespace TEngine
                     {
                         if (_selectedNode != null)
                         {
+                            // GUILayout.Label("<color=#0000ff>=====Click below to copy=====</color>");
+                            if (GUILayout.Button("CopyToClipboard")) {
+                                CopyToClipboard(Utility.Text.Format("{0}{2}{2}{1}", _selectedNode.LogMessage, _selectedNode.StackTrack, Environment.NewLine));
+                            }
+                            
                             Color32 color = GetLogStringColor(_selectedNode.LogType);
                             if (GUILayout.Button(Utility.Text.Format("<color=#{0:x2}{1:x2}{2:x2}{3:x2}><b>{4}</b></color>{6}{6}{5}", color.r, color.g, color.b, color.a, _selectedNode.LogMessage, _selectedNode.StackTrack, Environment.NewLine), "label"))
                             {
@@ -283,6 +300,33 @@ namespace TEngine
                     GUILayout.EndScrollView();
                 }
                 GUILayout.EndVertical();
+
+
+                if (Event.current != null) {
+                    // UnityEngine.Debug.Log($"Event.current.rawType: {Event.current.rawType}");
+                    //光标
+                    // EditorGUIUtility.AddCursorRect(splitterRect , MouseCursor.ResizeHorizontal);
+                    switch (Event.current.rawType) {
+                    //     //开始拖拽分割线
+                        case EventType.MouseDown:
+                            _isDragging = _splitterRect.Contains(Event.current.mousePosition);
+                            // UnityEngine.Debug.Log($"Event.current.rawType: {Event.current.rawType}, _isDragging: {_isDragging}");
+                    //         UnityEngine.Debug.Log($"Event.current.rawType: {Event.current.rawType}");
+                            // isDragging = splitterRect.Contains(Event.current.mousePosition);
+                            break;
+                        case EventType.MouseDrag:
+                            if (_isDragging) {
+                                _logScrollPosition.y += (Event.current.delta.y * 1.2f);
+                            }
+                            break;
+                        case EventType.MouseUp:
+                            if (_isDragging) {
+                                _isDragging = false;
+                                // UnityEngine.Debug.Log($"Event.current.rawType: {Event.current.rawType}, _isDragging: {_isDragging}");
+                            }
+                            break;
+                    }
+                }
             }
 
             private void Clear()

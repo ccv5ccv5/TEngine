@@ -619,7 +619,7 @@ MonoBehaviour:
   m_ActiveWindow: 0
   m_ShowFullWindow: 0
   m_ConsoleWindow:
-    m_LockScroll: 1
+    m_LockScroll: 0
     m_MaxLine: 100
     m_InfoFilter: 1
     m_WarningFilter: 1
