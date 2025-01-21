@@ -389,6 +389,7 @@ namespace TEngine
         /// <param name="customPackageName">指定资源包的名称。不传使用默认资源包</param>
         public ResourceDownloaderOperation CreateResourceDownloader(string customPackageName = "")
         {
+            UnityEngine.Debug.Log($"CreateResourceDownloader");
             if (string.IsNullOrEmpty(customPackageName))
             {
                 var package = YooAssets.GetPackage(PackageName);

@@ -62,9 +62,9 @@ namespace GameMain
                 if (initializationOperation.Status == EOperationStatus.Succeed)
                 {
                     // //热更新阶段文本初始化
-                    // LoadText.Instance.InitConfigData(null);
+                    LoadText.Instance.InitConfigData(null);
 
-                    // EPlayMode playMode = GameModule.Resource.PlayMode;
+                    EPlayMode playMode = GameModule.Resource.PlayMode;
 
                     // // 编辑器模式。
                     // if (playMode == EPlayMode.EditorSimulateMode)

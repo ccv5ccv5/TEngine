@@ -62,6 +62,14 @@ public static class SettingsUtils
         return url;
     }
 
+    public static string DownloadPathPrefix
+    {
+        get
+        {
+            return Path.Combine($"{ResourcesArea.ResAdminType}_{ResourcesArea.ResAdminCode}", GetPlatformName()).Replace("\\", "/");
+        }
+    }
+
     public static string GetResDownLoadPath(string fileName = "")
     {
         return Path.Combine(CompleteDownLoadPath, $"{ResourcesArea.ResAdminType}_{ResourcesArea.ResAdminCode}", GetPlatformName(), fileName).Replace("\\", "/");

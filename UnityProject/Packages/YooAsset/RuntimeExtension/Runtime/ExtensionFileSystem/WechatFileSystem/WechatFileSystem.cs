@@ -7,11 +7,12 @@ using WeChatWASM;
 
 public static class WechatFileSystemCreater
 {
-    public static FileSystemParameters CreateWechatFileSystemParameters(IRemoteServices remoteServices)
+    public static FileSystemParameters CreateWechatFileSystemParameters(IRemoteServices remoteServices, string cachePrefixPath)
     {
         string fileSystemClass = $"{nameof(WechatFileSystem)},YooAsset.RuntimeExtension";
         var fileSystemParams = new FileSystemParameters(fileSystemClass, null);
         fileSystemParams.AddParameter("REMOTE_SERVICES", remoteServices);
+        fileSystemParams.AddParameter("CACHE_PREFIX_PATH", cachePrefixPath);
         return fileSystemParams;
     }
 }
@@ -58,6 +59,7 @@ internal class WechatFileSystem : IFileSystem
     private readonly Dictionary<string, string> _cacheFilePaths = new Dictionary<string, string>(10000);
     private WXFileSystemManager _wxFileSystemMgr;
     private string _fileCacheRoot = string.Empty;
+    private string _cachePrefixPath = string.Empty;
 
     /// <summary>
     /// 包裹名称
@@ -168,6 +170,11 @@ internal class WechatFileSystem : IFileSystem
         {
             RemoteServices = (IRemoteServices)value;
         }
+        else if (name == "CACHE_PREFIX_PATH")
+        {
+            Debug.Log($"SetParameter: {name} = {value}");
+            _cachePrefixPath = (string)value;
+        }
         else
         {
             YooLogger.Warning($"Invalid parameter : {name}");
@@ -185,7 +192,7 @@ internal class WechatFileSystem : IFileSystem
         }
 
         _wxFileSystemMgr = WX.GetFileSystemManager();
-        _fileCacheRoot = $"{WX.env.USER_DATA_PATH}/__GAME_FILE_CACHE";
+        _fileCacheRoot = $"{WX.env.USER_DATA_PATH}/__GAME_FILE_CACHE/{_cachePrefixPath}";
         //_fileCacheRoot = $"{WX.env.USER_DATA_PATH}/__GAME_FILE_CACHE/子目录"; //注意：如果有子目录，请修改此处！
         //_fileCacheRoot = PathUtility.Combine(WX.PluginCachePath, $"StreamingAssets/WebGL");
     }
@@ -204,6 +211,7 @@ internal class WechatFileSystem : IFileSystem
     }
     public virtual bool NeedDownload(PackageBundle bundle)
     {
+        UnityEngine.Debug.Log($"NeedDownload: {bundle.FileName}");
         if (Belong(bundle) == false)
             return false;
 
@@ -250,6 +258,8 @@ internal class WechatFileSystem : IFileSystem
         if (_cacheFilePaths.TryGetValue(bundle.BundleGUID, out string filePath) == false)
         {
             filePath = PathUtility.Combine(_fileCacheRoot, bundle.FileName);
+
+            UnityEngine.Debug.Log($"GetCacheFileLoadPath: {filePath}");
             _cacheFilePaths.Add(bundle.BundleGUID, filePath);
         }
         return filePath;

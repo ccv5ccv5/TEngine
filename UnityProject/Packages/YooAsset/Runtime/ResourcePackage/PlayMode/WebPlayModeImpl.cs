@@ -83,18 +83,21 @@ namespace YooAsset
 
         ResourceDownloaderOperation IPlayMode.CreateResourceDownloaderByAll(int downloadingMaxNumber, int failedTryAgain, int timeout)
         {
+            UnityEngine.Debug.Log($"CreateResourceDownloaderByAll");
             List<BundleInfo> downloadList = PlayModeHelper.GetDownloadListByAll(ActiveManifest, WebServerFileSystem, WebRemoteFileSystem);
             var operation = new ResourceDownloaderOperation(PackageName, downloadList, downloadingMaxNumber, failedTryAgain, timeout);
             return operation;
         }
         ResourceDownloaderOperation IPlayMode.CreateResourceDownloaderByTags(string[] tags, int downloadingMaxNumber, int failedTryAgain, int timeout)
         {
+            UnityEngine.Debug.Log($"CreateResourceDownloaderByTags");
             List<BundleInfo> downloadList = PlayModeHelper.GetDownloadListByTags(ActiveManifest, tags, WebServerFileSystem, WebRemoteFileSystem);
             var operation = new ResourceDownloaderOperation(PackageName, downloadList, downloadingMaxNumber, failedTryAgain, timeout);
             return operation;
         }
         ResourceDownloaderOperation IPlayMode.CreateResourceDownloaderByPaths(AssetInfo[] assetInfos, int downloadingMaxNumber, int failedTryAgain, int timeout)
         {
+            UnityEngine.Debug.Log($"CreateResourceDownloaderByPaths");
             List<BundleInfo> downloadList = PlayModeHelper.GetDownloadListByPaths(ActiveManifest, assetInfos, WebServerFileSystem, WebRemoteFileSystem);
             var operation = new ResourceDownloaderOperation(PackageName, downloadList, downloadingMaxNumber, failedTryAgain, timeout);
             return operation;

@@ -45,7 +45,6 @@ namespace GameMain
                 //     ChangeState<ProcedurePreload>(procedureOwner);
                 //     return;
                 // }
-                Log.Info("ProcedureCreateDownloader to ProcedurePreload");
                 ChangeState<ProcedureCreateDownloader>(procedureOwner);
             }
             else
