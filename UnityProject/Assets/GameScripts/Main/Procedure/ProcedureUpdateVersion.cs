@@ -51,9 +51,8 @@ namespace GameMain
         {
             Log.Info("GetStaticVersion() #1");
 
-            Log.Info("GetStaticVersion() delay0.5f");
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
-
+            await UniTask.DelayFrame(10);
+            
             Log.Info("GetStaticVersion() #2");
             var operation = GameModule.Resource.RequestPackageVersionAsync();
             Log.Info("GetStaticVersion() #3:" + operation.PackageVersion);

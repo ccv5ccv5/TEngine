@@ -39,7 +39,7 @@ namespace GameMain
 
         private async UniTaskVoid CreateDownloader()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+            await UniTask.DelayFrame(10);
 
             _downloader = GameModule.Resource.CreateResourceDownloader();
 
