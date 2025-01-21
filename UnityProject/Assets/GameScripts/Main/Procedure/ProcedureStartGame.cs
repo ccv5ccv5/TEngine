@@ -24,7 +24,7 @@ namespace GameMain
             var sceneModule = ModuleSystem.GetModule<SceneModule>();
             if (sceneModule != null)
             {
-                var sceneHandle = sceneModule.LoadScene("Assets/AssetRaw/Scenes/New Scene.scene", LoadSceneMode.Single, false, 100, (handle) =>
+                var sceneHandle = sceneModule.LoadScene("Assets/AssetRaw/Scenes/MainScene.scene", LoadSceneMode.Single, false, 100, (handle) =>
                 {
                     Log.Info($"Scene {handle.SceneName} loaded successfully.");
                 });
