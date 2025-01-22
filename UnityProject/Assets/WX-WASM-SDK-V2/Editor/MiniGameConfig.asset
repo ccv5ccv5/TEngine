@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectConf:
     projectName: WechatProj
-    Appid: xxxxxxxxxxxxxx
+    Appid: wxbeb92c22d3669a8f
     CDN: https://7765-wechat-test-0glamryscc44a722-1302190585.tcb.qcloud.la/
     assetLoadType: 0
     compressDataPackage: 1
@@ -23,7 +23,7 @@ MonoBehaviour:
     StreamCDN: 
     bundleHashLength: 32
     bundlePathIdentifier: Default_;StreamingAssets;
-    bundleExcludeExtensions: 
+    bundleExcludeExtensions: version
     AssetsUrl: 
     MemorySize: 256
     HideAfterCallMain: 1
