@@ -37,9 +37,9 @@ public class SafeAreaRect : MonoBehaviour
         Apply(force: true);
     }
 
+#if UNITY_EDITOR
     private void OnDisable()
     {
-        Debug.Log("OnDisable");
         drivenRectTransformTracker.Clear();
         
         var rectTransform = transform as RectTransform;
@@ -51,6 +51,7 @@ public class SafeAreaRect : MonoBehaviour
             rectTransform.anchoredPosition = Vector2.zero;
         }
     }
+#endif
 
     public void Apply(bool force = false)
     {
