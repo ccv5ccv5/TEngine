@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectConf:
     projectName: WechatProj
-    Appid: wxbeb92c22d3669a8f
+    Appid: 
     CDN: https://7765-wechat-test-0glamryscc44a722-1302190585.tcb.qcloud.la/
     assetLoadType: 0
     compressDataPackage: 1
